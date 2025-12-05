@@ -249,6 +249,47 @@ else
     done
 fi
 
+# ---------------------------------------------------------------------------- #
+# Download your personal Google Drive model packs – ONLY ONCE per volume
+# ---------------------------------------------------------------------------- #
+MODELS_DOWNLOADED_FLAG="/workspace/.google_drive_models_downloaded"
+
+if [ ! -f "$MODELS_DOWNLOADED_FLAG" ]; then
+    echo "First time on this volume → downloading your Google Drive model packs..."
+    mkdir -p $COMFYUI_DIR/models
+
+    # Install gdown only when needed (keeps image clean)
+    pip install --no-cache-dir gdown > /dev/null
+
+    cd $COMFYUI_DIR/models
+
+    echo "Downloading pack 1/4..."
+    gdown --folder "https://drive.google.com/drive/folders/1c68t51mGX_tuWPC8gEQ4jcl_fJraoeJ_" --remaining-ok
+
+    echo "Downloading pack 2/4..."
+    gdown --folder "https://drive.google.com/drive/folders/1gfNLUeyf30o4jzjRRE--33gDgqNYUTJj" --remaining-ok
+
+    echo "Downloading pack 3/4..."
+    gdown --folder "https://drive.google.com/drive/folders/1qMEDnH9Z9sIJntwU83VzMcbpavynmLjZ" --remaining-ok
+
+    echo "Downloading pack 4/4..."
+    gdown --folder "https://drive.google.com/drive/folders/1Td4RHMCo4F3bXMo0CDZWLEtmbPjuW6rB" --remaining-ok
+
+    # Optional: also drop a couple of starter workflows
+    mkdir -p /workspace/workflows
+    cd /workspace/workflows
+    wget -q -O sdxl_basic.json \
+        https://raw.githubusercontent.com/comfyanonymous/ComfyUI_examples/master/sdxl/sdxl_example_workflow.json
+    wget -q -O flux_dev.json \
+        https://comfyanonymous.github.io/ComfyUI_examples/flux/flux1_dev_example.json
+
+    # Mark as done so this never runs again on this volume
+    touch "$MODELS_DOWNLOADED_FLAG"
+    echo "Google Drive model download completed – will never run again on this volume!"
+else
+    echo "Google Drive models already downloaded on this volume – skipping (instant start)"
+fi
+
 # Start ComfyUI with custom arguments if provided
 cd $COMFYUI_DIR
 FIXED_ARGS="--listen 0.0.0.0 --port 8188"
