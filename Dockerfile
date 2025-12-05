@@ -32,7 +32,7 @@ RUN apt-get update && \
 # Install pip for Python 3.12 and upgrade it
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python3.12 get-pip.py && \
-    python3.12 -m pip install --upgrade pip gdown && \
+    python3.12 -m pip install --upgrade pip && \
     rm get-pip.py
 
 # Set CUDA environment for building
@@ -140,16 +140,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
     mkdir -p /run/sshd
 
 # Create workspace directory
-RUN mkdir -p /workspace/runpod-slim/ComfyUI/models
-
-
-# === DOWNLOAD YOUR GOOGLE DRIVE FOLDERS DIRECTLY INTO FINAL MODEL PATHS ===
-WORKDIR /workspace/runpod-slim/ComfyUI/models
-
-RUN gdown --folder "https://drive.google.com/drive/folders/1c68t51mGX_tuWPC8gEQ4jcl_fJraoeJ_" --remaining-ok && \
-    gdown --folder "https://drive.google.com/drive/folders/1gfNLUeyf30o4jzjRRE--33gDgqNYUTJj" --remaining-ok && \
-    gdown --folder "https://drive.google.com/drive/folders/1qMEDnH9Z9sIJntwU83VzMcbpavynmLjZ" --remaining-ok && \
-    gdown --folder "https://drive.google.com/drive/folders/1Td4RHMCo4F3bXMo0CDZWLEtmbPjuW6rB" --remaining-ok
+RUN mkdir -p /workspace/runpod-slim
     
 WORKDIR /workspace/runpod-slim
 
@@ -165,4 +156,5 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
     update-alternatives --set python3 /usr/bin/python3.12
 
 ENTRYPOINT ["/start.sh"]
+
 
