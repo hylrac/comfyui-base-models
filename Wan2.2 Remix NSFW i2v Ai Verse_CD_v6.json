@@ -1,0 +1,373 @@
+{
+  "6": {
+    "inputs": {
+      "text": "Exact likeness of the young woman in the reference image, reddish-brown shoulder-length hair, pale skin, natural medium-large breasts with small pink nipples, completely nude. She is in a simple bedroom with soft warm lighting. Starting from a standing or kneeling position on the bed, she slowly lies back, propping herself slightly on her elbows at first, then fully reclines. She spreads her legs wide in a relaxed M-shape, knees bent and feet flat on the sheets. Both hands move down between her thighs; she uses her fingers to gently part and play with her unshaven pussy, showing thick natural reddish-brown pubic hair, detailed pink inner labia, visible clit and entrance, subtle wetness glistening. Realistic skin texture, soft breast bounce as she settles back, gentle hip movements and finger motion, flushed cheeks, half-lidded eyes looking at camera, photorealistic, highly detailed genitals, natural body hair, intimate close-to-medium shot.",
+      "clip": [
+        "97",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "(worst quality, low quality:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, out of focus, long body, long neck, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, cross-eyed, bad hands, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, text, logo, artist name, multiple girls, multiple views, child, loli, old woman, fat, obese, pregnant, censored, bar censor, mosaic censoring, blurry, low quality, chaotic, deformed, watermark, bad anatomy, shaky camera view point, (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, bald, shaven",
+      "clip": [
+        "97",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "58",
+        0
+      ],
+      "vae": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "39": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Charger VAE"
+    }
+  },
+  "54": {
+    "inputs": {
+      "shift": 8,
+      "model": [
+        "128",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModèleÉchantillonnageSD3"
+    }
+  },
+  "55": {
+    "inputs": {
+      "shift": 8,
+      "model": [
+        "129",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModèleÉchantillonnageSD3"
+    }
+  },
+  "57": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 621884084574082,
+      "steps": [
+        "68",
+        0
+      ],
+      "cfg": 1.7,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": [
+        "67",
+        0
+      ],
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "54",
+        0
+      ],
+      "positive": [
+        "107",
+        0
+      ],
+      "negative": [
+        "107",
+        1
+      ],
+      "latent_image": [
+        "107",
+        2
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Avancé)"
+    }
+  },
+  "58": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": 0,
+      "steps": [
+        "68",
+        0
+      ],
+      "cfg": 1.5,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "start_at_step": [
+        "67",
+        0
+      ],
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "55",
+        0
+      ],
+      "positive": [
+        "107",
+        0
+      ],
+      "negative": [
+        "107",
+        1
+      ],
+      "latent_image": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Avancé)"
+    }
+  },
+  "67": {
+    "inputs": {
+      "value": 7
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "Split_step"
+    }
+  },
+  "68": {
+    "inputs": {
+      "value": 15
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "77": {
+    "inputs": {
+      "unet_name": "Wan2.2_Remix_NSFW_i2v_14b_high_lighting_v2.0.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Charger Modèle Diffusion"
+    }
+  },
+  "97": {
+    "inputs": {
+      "clip_name": "nsfw_wan_umt5-xxl_fp8_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Charger CLIP"
+    }
+  },
+  "103": {
+    "inputs": {
+      "unet_name": "Wan2.2_Remix_NSFW_i2v_14b_low_lighting_v2.0.safetensors",
+      "weight_dtype": "fp8_e4m3fn"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Charger Modèle Diffusion"
+    }
+  },
+  "106": {
+    "inputs": {
+      "image": "IMG_20141201_001746.JPG"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Charger Image"
+    }
+  },
+  "107": {
+    "inputs": {
+      "width": 1200,
+      "height": 1600,
+      "length": 41,
+      "batch_size": 1,
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "vae": [
+        "39",
+        0
+      ],
+      "start_image": [
+        "106",
+        0
+      ]
+    },
+    "class_type": "WanImageToVideo",
+    "_meta": {
+      "title": "WanImageVersVidéo"
+    }
+  },
+  "114": {
+    "inputs": {
+      "filename_prefix": "video/ComfyUI",
+      "format": "auto",
+      "codec": "auto",
+      "video-preview": "",
+      "video": [
+        "115",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Enregistrer la vidéo"
+    }
+  },
+  "115": {
+    "inputs": {
+      "fps": 16,
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Créer une vidéo"
+    }
+  },
+  "117": {
+    "inputs": {
+      "model_name": "4x-UltraSharp.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Charger le modèle de mise à l'échelle"
+    }
+  },
+  "126": {
+    "inputs": {
+      "lora_name": "PubicHair_wan22_high_e40.safetensors",
+      "strength_model": 0.6,
+      "model": [
+        "77",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "127": {
+    "inputs": {
+      "lora_name": "PubicHair_wan22_low_e50.safetensors",
+      "strength_model": 0.6,
+      "model": [
+        "103",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "128": {
+    "inputs": {
+      "lora_name": "genitals_helper_v1.0_e219.safetensors",
+      "strength_model": 0.6,
+      "model": [
+        "126",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "129": {
+    "inputs": {
+      "lora_name": "genitals_helper_v1.0_e219.safetensors",
+      "strength_model": 0.6,
+      "model": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "130": {
+    "inputs": {
+      "text": "(worst quality, low quality:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, out of focus, long body, long neck, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, cross-eyed, bad hands, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, text, logo, artist name, multiple girls, multiple views, child, loli, old woman, fat, obese, pregnant, censored, bar censor, mosaic censoring, blurry, low quality, chaotic, deformed, watermark, bad anatomy, shaky camera view point, (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy"
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "131": {
+    "inputs": {
+      "text": "very realistic skin, beautiful natural bouncy tits, very detailed genitals, detailed butthole, hairy pussy, dynamic movement, pubic hair++, unshaven++, realistic,\n\nthe scene zooms out to show the girl entire body. the girl lifts her top and reveals her massive tits, and lays down while she is getting fucked in missionary position and bouncing on a dick. shot from lower perspective\n\n\n"
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "132": {
+    "inputs": {
+      "text": "A gorgeous young woman with very realistic detailed skin and natural unshaven body walks backward toward the camera in a slow seductive motion. She looks straight at the viewer with a teasing smile while slowly unzipping her tight top with both hands. The zipper pulls all the way down, fabric parting naturally. She shrugs the open top off her shoulders, letting it slide down her arms and drop to the floor. Her beautiful full bouncy breasts jiggle freely with realistic physics as she moves. She then hooks her thumbs into her shorts or panties and pushes them down her hips in one smooth motion, stepping out of them, fully revealing her hairy pussy with detailed natural pubic hair, detailed labia and tight butthole. Soft natural lighting, highly detailed skin texture, realistic breast bounce and body movement throughout, photorealistic, 4K."
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "133": {
+    "inputs": {
+      "text": "Close-up on a beautiful blonde girl with flushed face and half-closed eyes, lying on her back in a messy bed, legs pulled up and spread wide. She is being penetrated anally in a steady rhythmic motion, her body rocking slightly with each thrust. With one trembling hand she reaches down, uses two fingers to spread her wet pink pussy lips wide open, revealing every detail inside as her hips jerk and her toes curl in an intense visible orgasm. Realistic skin textures, glistening sweat and fluids, natural breast bounce, detailed open vagina and tight penetrated anus, soft warm bedroom lighting, photorealistic, highly detailed genitals, strong orgasmic expression."
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  }
+}
