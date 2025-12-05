@@ -142,7 +142,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 # Create workspace directory
 RUN mkdir -p /workspace/runpod-slim/ComfyUI/workflows
 
-COPY ./workflows/* /workspace/runpod-slim/ComfyUI/workflows/ 
+COPY *.json /workspace/runpod-slim/ComfyUI/workflows/ 
     
 WORKDIR /workspace/runpod-slim
 
@@ -158,6 +158,7 @@ RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
     update-alternatives --set python3 /usr/bin/python3.12
 
 ENTRYPOINT ["/start.sh"]
+
 
 
 
