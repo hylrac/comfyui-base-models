@@ -263,17 +263,22 @@ if [ ! -f "$MODELS_DOWNLOADED_FLAG" ]; then
 
     cd $COMFYUI_DIR/models
 
-    echo "Downloading pack 1/4..."
-    gdown --folder "https://drive.google.com/drive/folders/1c68t51mGX_tuWPC8gEQ4jcl_fJraoeJ_" --remaining-ok
+   # List of your three folders – add or remove as you like
+    declare -a folders=(
+        "1c68t51mGX_tuWPC8gEQ4jcl_fJraoeJ_"
+        "1gfNLUeyf30o4jzjRRE--33gDgqNYUTJj"
+        "1qMEDnH9Z9sIJntwU83VzMcbpavynmLjZ"
+        "1Td4RHMCo4F3bXMo0CDZWLEtmbPjuW6rB"
+    )
 
-    echo "Downloading pack 2/4..."
-    gdown --folder "https://drive.google.com/drive/folders/1gfNLUeyf30o4jzjRRE--33gDgqNYUTJj" --remaining-ok
-
-    echo "Downloading pack 3/4..."
-    gdown --folder "https://drive.google.com/drive/folders/1qMEDnH9Z9sIJntwU83VzMcbpavynmLjZ" --remaining-ok
-
-    echo "Downloading pack 4/4..."
-    gdown --folder "https://drive.google.com/drive/folders/1Td4RHMCo4F3bXMo0CDZWLEtmbPjuW6rB" --remaining-ok
+    for folder_id in "${folders[@]}"; do
+        echo "Trying folder $folder_id ..."
+        if gdown --folder "https://drive.google.com/drive/folders/$folder_id" --remaining-ok; then
+            echo "Success: Folder $folder_id downloaded"
+        else
+            echo "Warning: Failed or rate-limited → skipping folder $folder_id (pod will still start)"
+        fi
+    done
 
     # Optional: also drop a couple of starter workflows
     mkdir -p /workspace/workflows
